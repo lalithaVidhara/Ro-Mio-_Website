@@ -1,0 +1,28 @@
+{
+  "name": "ro-mio-website",
+  "version": "1.0.0",
+  "description": "RoMio is a full-featured e-commerce platform designed for seamless online shopping experiences. Developed using **React.js**, **Node.js**, **Stripe**, and **Redis**, RoMio is built to deliver a scalable and efficient solution for both store customers and administrators. This project was tailored for a client to manage their growing online business with ease.",
+  "main": "backend/server.js",
+  "scripts": {
+    "dev":"nodemon backend/server.js",
+    "start":"node backend/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.5.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "ioredis": "^5.4.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.0",
+    "stripe": "^17.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
