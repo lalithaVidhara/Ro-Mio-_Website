@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: t[rue, "Email is required"],
+        required: [true, "Email is required"],
         unique: true,
         lowercase: true,
         trim: true
@@ -40,8 +40,6 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const User = mongoose.model("User", userSchema);
-
 //pre-save hook to hash pw before saving
 userSchema.pre("save", async function(next) {
     if(!this.isModified("password")) return next();
@@ -58,5 +56,7 @@ userSchema.pre("save", async function(next) {
 userSchema.methods.comparePassword = async function(Password) {
     return bcrypt.compare(Password, this.password);
 }
+
+const User = mongoose.model("User", userSchema);
 
 export default User;
