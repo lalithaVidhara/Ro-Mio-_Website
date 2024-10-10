@@ -1,6 +1,7 @@
 import { redis } from "../lib/redis.js";
 import User from "../models/user.model.js";
 import jwt from "jsonwebtoken"; 
+import dotenv from "dotenv";
 
 const generateTokens = (userId) => {
     const accessToken = jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET, {
@@ -59,14 +60,19 @@ export const signup = async (req, res) => {
     }
 };
 export const login = async (req, res) => {
-    res.send("login route called");
+    try {
+        
+    } catch (error) {
+        
+    }
 };
+
 export const logout = async (req, res) => {
     try {
         const refreshToken = req.cookies.refreshToken;
         if(refreshToken){
             const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-            await redis.del(`refreshToken:${decoded.userId}`);
+            const result = await redis.del(`refreshToken:${refreshToken}`);
         }
 
         res.clearCookie("accessToken");
