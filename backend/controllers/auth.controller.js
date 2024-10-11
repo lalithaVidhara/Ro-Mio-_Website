@@ -49,12 +49,12 @@ export const signup = async (req, res) => {
 
         setCookies(res, accessToken, refreshToken);
 
-        res.status(201).json({user: {
+        res.status(201).json({
             _id: user._id,
             name: user.name,
             email: user.email,
             role: user.role
-        }, message: "User created successfully"});
+        });
     } catch (error) {
         console.log("Error in signup controller", error.message);
         res.status(500).json({ message: error.message });
@@ -71,12 +71,12 @@ export const login = async (req, res) => {
             await storeRefreshToken(user._id, refreshToken);
             setCookies(res, accessToken, refreshToken);
 
-            res.status(200).json({user: {
+            res.status(200).json({
                 _id: user._id,
                 name: user.name,
                 email: user.email,
                 role: user.role
-            }, message: "Logged in successfully"});
+            });
         }
     } catch (error) {
         console.log("Error in login controller", error.message);
