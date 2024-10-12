@@ -140,7 +140,8 @@ export const logout = async (req, res) => {
 export const refreshToken = async (req, res) => {
     try {
         const refreshToken = req.cookies.refreshToken;
-
+        console.log("Refresh Token from Cookies:", refreshToken); // Add a log for the refresh token
+        
         if (!refreshToken) {
             return res.status(401).json({ message: "No refresh token found" });
         }
@@ -148,6 +149,7 @@ export const refreshToken = async (req, res) => {
         let decoded;
         try {
             decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+            console.log("Decoded Refresh Token:", decoded);
         } catch (err) {
             console.log("JWT verification error:", err.message);
             return res.status(403).json({ message: "Invalid refresh token" });
@@ -156,7 +158,9 @@ export const refreshToken = async (req, res) => {
         const storedToken = await redis.get(`refreshToken:${refreshToken}`);
         console.log("Stored Token from Redis:", storedToken);
 
-        if (!storedToken || storedToken !== refreshToken) {
+        // Check if Redis stored token matches
+        // used decoded.userID because refresh token gives the whole 
+        if (!storedToken || storedToken !== decoded.userId) {
             return res.status(403).json({ message: "Invalid refresh token" });
         }
 
@@ -175,7 +179,10 @@ export const refreshToken = async (req, res) => {
 
         res.json({ message: "Token refreshed successfully" });
     } catch (error) {
-        console.log("Error in refreshToken controller", error.message);
+        console.log("Error in refresh Token controller", error.message);
         res.status(500).json({ message: "Server error", error: error.message });
     }
 };
+
+//To do
+//export const getProfile = async (req, res) => {}
