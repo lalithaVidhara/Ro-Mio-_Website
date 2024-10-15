@@ -67,7 +67,8 @@ export const createCheckoutSession = async (req, res) => {
 
         res.status(200).json({id: session.id, totalAmount: totalAmount/100});
     } catch (error) {
-        
+        console.log("Error in createCheckoutSession controller", error.message);
+        res.status(500).json({message: "Server Error", error: error.message});
     }
 }
 
