@@ -1,5 +1,6 @@
 import {stripe} from "../lib/stripe.js";
 import Coupon from "../models/coupon.model.js";
+import Order from "../models/order.model.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -57,7 +58,13 @@ export const createCheckoutSession = async (req, res) => {
             metadata: {
                 userId: req.user._id.toString(),
                 couponCode: couponCode || "",
-            }
+                products: JSON.stringify(
+                    products.map((p) => ({
+                        id: p._id,
+						quantity: p.quantity,
+						price: p.price,
+                    }))),
+            },
         });
 
         //creating new coupons for next purchase if 200$ or more is spend
@@ -68,9 +75,9 @@ export const createCheckoutSession = async (req, res) => {
         res.status(200).json({id: session.id, totalAmount: totalAmount/100});
     } catch (error) {
         console.log("Error in createCheckoutSession controller", error.message);
-        res.status(500).json({message: "Server Error", error: error.message});
+        res.status(500).json({message: "Server Error Processing Checkout", error: error.message});
     }
-}
+};
 
 
 async function createStripeCoupon(discountPercentage) {
@@ -79,7 +86,7 @@ async function createStripeCoupon(discountPercentage) {
         duration: "once",
     });
     return coupon.id;
-}
+};
 
 async function createNewCoupon(userId) {
     const newCoupon = new Coupon({
@@ -91,4 +98,45 @@ async function createNewCoupon(userId) {
 
     await newCoupon.save();
     return newCoupon;
+}
+
+export const checkoutSuccess = async (req, res) => {
+    try {
+        const {sessionId} = req.body;
+        const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+        if(session.payment_status === "paid") {
+            if(session.metadata.couponCode) {
+                await Coupon.findOneAndUpdate({
+                    code: session.metadata.couponCode,
+                    userId: session.metadata.userId,
+                }, {
+                    isActive: false
+                });
+            }
+            //create a new order
+            const products = JSON.parse(session.metadata.products);
+            const newOrder = new Order({
+                user: session.metadata.userId,
+                products: products.map((product) => ({
+					product: product.id,
+					quantity: product.quantity,
+					price: product.price,
+				})),
+                totalAmount: session.amount_total / 100, //Convert from cents to $
+                stripeSessionId: sessionId,
+            })
+
+            await newOrder.save();
+
+            res.status(200).json({
+                success: true,
+                message: "Order created successfully and coupon applied if any",
+                orderId: newOrder._id,
+            });
+        }
+    } catch (error) {
+        console.log("Error in checkoutSuccess controller", error.message);
+        res.status(500).json({message: "Server Error Processing Successfull Checkout", error: error.message});
+    }
 }
