@@ -12,7 +12,7 @@ export const getAnalytics = async (req, res) => {
 
         const dailySalesData = await getDailySalesData(startDate, endDate);
 
-        res json ({
+        res.json ({
             analyticsData,
             dailySalesData
         })
