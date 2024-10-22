@@ -15,12 +15,15 @@ function App() {
 			  </div>
 		  </div>
 
+      {/* Content */}
       <div className='relative z-50 pt-20'>
       <NavBar />
       <Routes>
         <Route path="/" element ={<HomePage/>} /> 
         <Route path="/signup" element ={<SignUpPage/>} /> 
         <Route path="/login" element ={<LoginPage/>} /> 
+        {/*todo <Route path="*" element={<NotFound />} /> */}
+        {/* <Route path="*" element={<Navigate to="/" />} /> */}
       </Routes>
       </div>
 
