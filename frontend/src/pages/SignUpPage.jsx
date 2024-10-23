@@ -6,7 +6,24 @@ import {motion} from 'framer-motion';
 
 const SignUpPage = () => {
   const loading = true;
-  return <div>SignUpPage</div>;
+
+  const [formData, setFormData] = useState({
+		name: "",
+		email: "",
+		password: "",
+		confirmPassword: "",
+	});
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
+  return (
+    <div className='flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
+      <motion.div></motion.div>
+    </div>
+  )
 
 };
 
