@@ -157,7 +157,7 @@ const SignUpPage = () => {
 
       </motion.div>
     </div>
-  )
+  );
 
 };
 
