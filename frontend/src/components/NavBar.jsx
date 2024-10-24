@@ -11,7 +11,7 @@ const NavBar = () => {
 
       <div className='container mx-auto px-4 py-3'>
         <div className='flex flex-wrap justify-between items-center'>
-        <Link to='/' className='text-2xl font-bold text-rose-400 items-center space-x-2 flex'>
+        <Link to='/' className='text-2xl font-bold text-rose-600 items-center space-x-2 flex'>
           RoMio Clothing
         </Link>
 

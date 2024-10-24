@@ -5,7 +5,7 @@ import {UserPlus, Mail, Lock, User, ArrowRight, Loader} from 'lucide-react';
 import {motion} from 'framer-motion';
 
 const SignUpPage = () => {
-  const loading = true;
+  const loading = false;
 
   const [formData, setFormData] = useState({
 		name: "",
@@ -124,7 +124,35 @@ const SignUpPage = () => {
 								/>
 							</div>
 						</div>
+
+            <button
+							type='submit'
+							className='w-full flex justify-center py-2 px-4 border border-transparent 
+							rounded-md shadow-sm text-sm font-medium text-white bg-rose-600
+							 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2
+							  focus:ring-rose-500 transition duration-150 ease-in-out disabled:opacity-50'
+							disabled={loading}
+						>
+							{loading ? (
+								<>
+									<Loader className='mr-2 h-5 w-5 animate-spin' aria-hidden='true' />
+									Loading...
+								</>
+							) : (
+								<>
+									<UserPlus className='mr-2 h-5 w-5' aria-hidden='true' />
+									Sign up
+								</>
+							)}
+						</button>
           </form>
+
+          <p className='mt-8 text-center text-sm text-gray-400'>
+						Already have an account?{" "}
+						<Link to='/login' className='font-medium text-rose-600 hover:text-rose-300'>
+							Login here <ArrowRight className='inline h-4 w-4' />
+						</Link>
+					</p>
         </div>
 
       </motion.div>
