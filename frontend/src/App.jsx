@@ -22,8 +22,6 @@ function App() {
         <Route path="/" element ={<HomePage/>} /> 
         <Route path="/signup" element ={<SignUpPage/>} /> 
         <Route path="/login" element ={<LoginPage/>} /> 
-        {/*todo <Route path="*" element={<NotFound />} /> */}
-        {/* <Route path="*" element={<Navigate to="/" />} /> */}
       </Routes>
       </div>
 
