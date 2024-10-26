@@ -3,8 +3,8 @@ import { ShoppingCart, UserPlus, LogIn, LogOut, Lock, Import } from "lucide-reac
 import { Link } from 'react-router-dom';
 
 const NavBar = () => {
-  const user = false;
-  const isAdmin = false;
+  const user = false; //implement this
+  const isAdmin = false; //implement this
   return (
 
     <header className='fixed top-0 left-0 w-full bg-gray-900 bg-opacity-90 backdrop-blur-md shadow-lg z-40 transition-all duration-300 border-b border-rose-800'>
