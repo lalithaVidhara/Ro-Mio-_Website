@@ -35,7 +35,7 @@ const LoginPage = () => {
           <form onSubmit={handleSubmit} className='space-y-6'>
             
             <div>
-							<label htmlFor='email' className='block text-sm font-medium text-gray-300'>
+							<label htmlFor='email' className='block text-sm font-medium text-gray-200'>
 								Email address
 							</label>
 							<div className='mt-1 relative rounded-md shadow-sm'>
@@ -58,7 +58,7 @@ const LoginPage = () => {
 						</div>
 
             <div>
-							<label htmlFor='password' className='block text-sm font-medium text-gray-300'>
+							<label htmlFor='password' className='block text-sm font-medium text-gray-200'>
 								Password
 							</label>
 							<div className='mt-1 relative rounded-md shadow-sm'>

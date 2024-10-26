@@ -5,7 +5,7 @@ import {UserPlus, Mail, Lock, User, ArrowRight, Loader} from 'lucide-react';
 import {motion} from 'framer-motion';
 
 const SignUpPage = () => {
-  const loading = false;
+  const loading = false; //add this
 
   const [formData, setFormData] = useState({
 		name: "",
@@ -39,7 +39,7 @@ const SignUpPage = () => {
         <div className='bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10'>
           <form onSubmit={handleSubmit} className='space-y-6'>
             <div>
-							<label htmlFor='name' className='block text-sm font-medium text-gray-300'>
+							<label htmlFor='name' className='block text-sm font-medium text-gray-200'>
 								Full name
 							</label>
 							<div className='mt-1 relative rounded-md shadow-sm'>
@@ -61,7 +61,7 @@ const SignUpPage = () => {
             
             
             <div>
-							<label htmlFor='email' className='block text-sm font-medium text-gray-300'>
+							<label htmlFor='email' className='block text-sm font-medium text-gray-200'>
 								Email address
 							</label>
 							<div className='mt-1 relative rounded-md shadow-sm'>
@@ -84,7 +84,7 @@ const SignUpPage = () => {
 						</div>
 
             <div>
-							<label htmlFor='password' className='block text-sm font-medium text-gray-300'>
+							<label htmlFor='password' className='block text-sm font-medium text-gray-200'>
 								Password
 							</label>
 							<div className='mt-1 relative rounded-md shadow-sm'>
@@ -105,7 +105,7 @@ const SignUpPage = () => {
 						</div>
 
             <div>
-							<label htmlFor='confirmPassword' className='block text-sm font-medium text-gray-300'>
+							<label htmlFor='confirmPassword' className='block text-sm font-medium text-gray-200'>
 								Confirm Password
 							</label>
 							<div className='mt-1 relative rounded-md shadow-sm'>
