@@ -26,7 +26,7 @@ export const useUserStore = create((set, get) => ({
 		
 	},
 
-	signup: async (email, password) => {
+	login: async (email, password) => {
 		set({ loading: true });
 
 		try {
@@ -38,5 +38,15 @@ export const useUserStore = create((set, get) => ({
 			toast.error(error.response.data.message || "An error occurred");
 		}
 		
+	},
+
+	checkAuth: async () => {
+		set({ checkingAuth: true });
+		try {
+			const response = await axios.get("/auth/profile");
+			set({ user: response.data, checkingAuth: false });
+		} catch (error) {
+			set({ checkingAuth: false, user: null });
+		}
 	},
 }));
