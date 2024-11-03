@@ -62,7 +62,11 @@ export const signup = async (req, res) => {
 };
 export const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password } = req.body.email;
+        console.log("Request body:", req.body);
+        console.log("Email received in login request:", email.email);
+
+
         const user = await User.findOne({ email });
 
         if(user && (await user.comparePassword(password))) {

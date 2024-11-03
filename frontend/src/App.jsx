@@ -6,6 +6,8 @@ import SignUpPage from "./pages/SignUpPage";
 import NavBar from "./components/NavBar";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
+import { useUserStore } from "./stores/useUserStore";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 function App() {
   const {user, checkAuth, checkingAuth} = useUserStore();
@@ -14,7 +16,7 @@ function App() {
     checkAuth();
   }, [checkAuth]);
 
-  if(checkingAuth) return <LoadingSpinner/>;
+  if(checkingAuth) return <LoadingSpinner />
 
   return (
     <div className='min-h-screen bg-gray-900 text-white relative overflow-hidden'>
