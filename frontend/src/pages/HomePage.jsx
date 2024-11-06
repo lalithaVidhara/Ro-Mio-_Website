@@ -9,7 +9,7 @@ const categories = [
 	{ href: "/glasses", name: "Glasses", imageUrl: "/glasses.png" },
 	{ href: "/jackets", name: "Jackets", imageUrl: "/jackets.jpg" },
 	{ href: "/suits", name: "Suits", imageUrl: "/suits.jpg" },
-	{ href: "/bags", name: "Bags", imageUrl: "/bags.jpg" },
+	//{ href: "/bags", name: "Bags", imageUrl: "/bags.jpg" },
 ];
 
 const HomePage = () => {
@@ -20,7 +20,7 @@ const HomePage = () => {
 					Explore Our Collection
 				</h1>
 				<p className='text-center text-xl text-gray-300 mb-12'>
-					Discover the inner Romio with in YOU
+					Discover the inner ROMIO with in you
 				</p>
 
 				<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
