@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { PlusCircle, Upload, Loader } from "lucide-react";
+import { useProductStore } from '../stores/useProductStore';
 
 const categories = ["jeans", "t-shirts", "shoes", "glasses", "jackets", "suits", "bags"];
 
@@ -14,12 +15,31 @@ const CreateProductForm = () => {
 		image: "",
 	});
 
-	const handleSubmit = (e) => {
+	const {createProduct, loading} = useProductStore();
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(newProduct);
+		try {
+			await createProduct(newProduct);
+			setNewProduct({ name: "", description: "", price: "", category: "", image: "" });
+		} catch (error) {
+			console.log("Error creating product", error);
+		}
 	};
 
-	const loading = false;
+	const handleImageChange = (e) => {
+		const file = e.target.files[0];
+		if (file) {
+			const reader = new FileReader();
+
+			reader.onloadend = () => {
+				setNewProduct({ ...newProduct, image: reader.result });
+			};
+
+			reader.readAsDataURL(file); // Read Data as Base64
+		}
+	}
+
 
 return (
 	<motion.div
@@ -109,7 +129,9 @@ return (
 
 
 			<div className='mt-1 flex items-center'>
-				<input type='file' id='image' className='sr-only' accept='image/*' />
+				<input type='file' id='image' className='sr-only' accept='image/*' 
+				onChange={handleImageChange}
+				/>
 				<label
 					htmlFor='image'
 					className='cursor-pointer bg-gray-700 py-2 px-3 border border-gray-600 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-300 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500'
